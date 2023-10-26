@@ -3,6 +3,7 @@ package com.xpanxion.assignments.shared;
 import com.xpanxion.assignments.stu0.Person;
 
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class PersonRepository {
 
@@ -18,9 +19,23 @@ public class PersonRepository {
 
     public PersonRepository() {
         personHashMap = new HashMap<Integer, Person>();
-        personHashMap.put(1, new Person(1, "Alice", "Jones"));
-        personHashMap.put(2, new Person(2, "Bob", "Smith"));
-        personHashMap.put(3, new Person(3, "Charlie", "Brown"));
+
+        Scanner console = new Scanner(System.in);
+        String name = "";
+        int i = 1;
+
+        while (true) {
+            System.out.print("Enter Person: " + i + ", ");
+            name = console.nextLine();
+            if (name.equals("done")) {
+                break;
+            }
+            String[] splitter = name.split(" ");
+
+            personHashMap.put(i, new Person(i, splitter[0], splitter[1]));
+            i++;
+        }
+        personHashMap.forEach((key, value) -> System.out.println(value.toString()));
     }
 
     //
